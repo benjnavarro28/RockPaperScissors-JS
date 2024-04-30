@@ -25,12 +25,40 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
-
+    if (humanChoice === 'rock' && computerChoice === 'scissors') {
+        console.log('You win! Rock beats Scissors!');
+        humanScore += 1;
+    } else if (humanChoice === 'paper' && computerChoice === 'rock') {
+        console.log('You win! Paper beats Rock!');
+        humanScore += 1;
+    } else if (humanChoice === 'scissors' && computerChoice === 'paper') {
+        console.log('You win! Scissors beats Paper!');
+        humanScore += 1;
+    } else if (computerChoice === 'rock' && humanChoice === 'scissors') {
+        console.log('You lose! Rock beats Scissors!');
+        computerScore += 1;
+    } else if (computerChoice === 'paper' && humanChoice === 'rock') {
+        console.log('You lose! Paper beats Rock!');
+        computerScore += 1;
+    } else if (computerChoice === 'scissors' && humanChoice === 'paper') {
+        console.log('You lose! Scissors beats Paper!');
+        computerScore += 1;
+    } else if (humanChoice === computerChoice) {
+        console.log('It\'s a tie!')
+    }
 }
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
 
 function playGame() {
     // Play 5 rounds of RPS
     playRound();
+    playRound();
+    playRound();
+    playRound();
+    playRound();
 }
 
 console.log(getComputerChoice());
+getHumanChoice();
