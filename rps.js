@@ -3,7 +3,6 @@ let computerScore = 0;
 
 function getComputerChoice() {
     const computer_choice_num = Math.floor(Math.random() * 3);
-    console.log(computer_choice_num);
     switch(computer_choice_num) {
         case 0:
             return "rock";
@@ -15,7 +14,7 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    const human_choice = prompt("Rock, Paper, or Scissors?");
+    const human_choice = prompt("Rock, Paper, or Scissors?").toLowerCase();
     if (human_choice === "rock" || human_choice === "paper" || human_choice === "scissors") {
         return human_choice;
     }
