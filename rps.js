@@ -27,9 +27,7 @@ function getHumanChoice() {
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
-
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
+    roundsPlayed = 0;
 
     function playRound(humanChoice, computerChoice) {
         if (humanChoice === 'rock' && computerChoice === 'scissors') {
@@ -55,11 +53,24 @@ function playGame() {
         }
     }
     // Play 5 rounds of RPS
-    playRound(humanSelection, computerSelection);
-    playRound(humanSelection, computerSelection);
-    playRound(humanSelection, computerSelection);
-    playRound(humanSelection, computerSelection);
-    playRound(humanSelection, computerSelection);
+    while (roundsPlayed < 5) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+
+        playRound(humanSelection, computerSelection);
+        roundsPlayed += 1;
+    }
+    
+    if (humanScore > computerScore) {
+        console.log('You win!');
+    } else if (humanScore < computerScore) {
+        console.log('You lose! Game over!');
+    } else if (humanScore === computerScore) {
+        console.log('It\'s a tie! No one wins!');
+    }
+
+    console.log('Human score: ' + humanScore);
+    console.log('Computer score: ' + humanScore);
 }
 
 playGame();
