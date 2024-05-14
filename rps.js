@@ -13,20 +13,22 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    const human_choice = prompt("Rock, Paper, or Scissors?").toLowerCase();
-    if (human_choice === "rock" || human_choice === "paper" || human_choice === "scissors") {
-        return human_choice;
-    }
-    else {
-        console.log("Please enter a valid option!");
-    }
-}
-
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
     roundsPlayed = 0;
+
+    scoreBoard = document.getElementById('scoreboard');
+    humanScoreDisplay = document.createElement('h2');
+    humanScoreDisplay.textContent = "Human Score: " + humanScore;
+    computerScoreDisplay = document.createElement('h2');
+    computerScoreDisplay.textContent = "Computer Score: " + computerScore;
+    scoreBoard.appendChild(humanScoreDisplay);
+    scoreBoard.appendChild(computerScoreDisplay);
+
+    rockBtn = document.getElementById('rock-btn');
+    paperBtn = document.getElementById('paper-btn');
+    scissorsBtn = document.getElementById('scissors-btn');
 
     function playRound(humanChoice, computerChoice) {
         if (humanChoice === 'rock' && computerChoice === 'scissors') {
@@ -50,15 +52,20 @@ function playGame() {
         } else if (humanChoice === computerChoice) {
             console.log('It\'s a tie!');
         }
+        humanScoreDisplay.textContent = "Human Score: " + humanScore;
+        computerScoreDisplay.textContent = "Computer Score: " + computerScore;
     }
-    // Play 5 rounds of RPS
-    while (roundsPlayed < 5) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
+    rockBtn.addEventListener('click', () => {
+        playRound('rock', getComputerChoice());
+    });
 
-        playRound(humanSelection, computerSelection);
-        roundsPlayed += 1;
-    }
+    paperBtn.addEventListener('click', () => {
+        playRound('paper', getComputerChoice());
+    });
+
+    scissorsBtn.addEventListener('click', () => {
+        playRound('scissors', getComputerChoice());
+    });
     
     if (humanScore > computerScore) {
         console.log('You win!');
@@ -67,9 +74,6 @@ function playGame() {
     } else if (humanScore === computerScore) {
         console.log('It\'s a tie! No one wins!');
     }
-
-    console.log('Human score: ' + humanScore);
-    console.log('Computer score: ' + computerScore);
 }
 
 playGame();
