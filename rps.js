@@ -61,7 +61,20 @@ function playGame() {
 
         humanScoreDisplay.textContent = "Human Score: " + humanScore;
         computerScoreDisplay.textContent = "Computer Score: " + computerScore;
-        roundsPlayed++;
+        roundsPlayed += 1;
+        if (roundsPlayed === 5) {
+            finalScoreDisplay = document.createElement('h2');
+            if (humanScore > computerScore) {
+                finalScoreDisplay.textContent = 'You win!';
+                scoreBoard.appendChild(finalScoreDisplay);
+            } else if (humanScore < computerScore) {
+                finalScoreDisplay.textContent = 'You lose! Game over!';
+                scoreBoard.appendChild(finalScoreDisplay);
+            } else if (humanScore === computerScore) {
+                finalScoreDisplay.textContent = 'It\'s a tie! No one wins!';
+                scoreBoard.appendChild(finalScoreDisplay);
+            }
+        }
     }
     rockBtn.addEventListener('click', () => {
         playRound('rock', getComputerChoice());
@@ -74,20 +87,6 @@ function playGame() {
     scissorsBtn.addEventListener('click', () => {
         playRound('scissors', getComputerChoice());
     });
-    
-    if (roundsPlayed === 5) {
-        finalScoreDisplay = document.createElement('h2');
-        if (humanScore > computerScore) {
-            finalScoreDisplay.textContent = 'You win!';
-            scoreBoard.appendChild(finalScoreDisplay);
-        } else if (humanScore < computerScore) {
-            finalScoreDisplay.textContent = 'You lose! Game over!';
-            scoreBoard.appendChild(finalScoreDisplay);
-        } else if (humanScore === computerScore) {
-            finalScoreDisplay.textContent = 'It\'s a tie! No one wins!';
-            scoreBoard.appendChild(finalScoreDisplay);
-        }
-    }
 }
 
 playGame();
