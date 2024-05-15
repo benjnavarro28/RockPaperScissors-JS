@@ -19,10 +19,14 @@ function playGame() {
     roundsPlayed = 0;
 
     scoreBoard = document.getElementById('scoreboard');
+    humanChoiceDisplay = document.createElement('h2');
+    computerChoiceDisplay = document.createElement('h2');
     humanScoreDisplay = document.createElement('h2');
     humanScoreDisplay.textContent = "Human Score: " + humanScore;
     computerScoreDisplay = document.createElement('h2');
     computerScoreDisplay.textContent = "Computer Score: " + computerScore;
+    scoreBoard.appendChild(humanChoiceDisplay);
+    scoreBoard.appendChild(computerChoiceDisplay);
     scoreBoard.appendChild(humanScoreDisplay);
     scoreBoard.appendChild(computerScoreDisplay);
 
@@ -31,6 +35,8 @@ function playGame() {
     scissorsBtn = document.getElementById('scissors-btn');
 
     function playRound(humanChoice, computerChoice) {
+        humanChoiceDisplay.textContent = "You chose: " + humanChoice;
+        computerChoiceDisplay.textContent = "The computer chose: " + computerChoice;
         if (humanChoice === 'rock' && computerChoice === 'scissors') {
             console.log('You win! Rock beats Scissors!');
             humanScore += 1;
@@ -52,8 +58,10 @@ function playGame() {
         } else if (humanChoice === computerChoice) {
             console.log('It\'s a tie!');
         }
+
         humanScoreDisplay.textContent = "Human Score: " + humanScore;
         computerScoreDisplay.textContent = "Computer Score: " + computerScore;
+        roundsPlayed++;
     }
     rockBtn.addEventListener('click', () => {
         playRound('rock', getComputerChoice());
@@ -67,12 +75,18 @@ function playGame() {
         playRound('scissors', getComputerChoice());
     });
     
-    if (humanScore > computerScore) {
-        console.log('You win!');
-    } else if (humanScore < computerScore) {
-        console.log('You lose! Game over!');
-    } else if (humanScore === computerScore) {
-        console.log('It\'s a tie! No one wins!');
+    if (roundsPlayed === 5) {
+        finalScoreDisplay = document.createElement('h2');
+        if (humanScore > computerScore) {
+            finalScoreDisplay.textContent = 'You win!';
+            scoreBoard.appendChild(finalScoreDisplay);
+        } else if (humanScore < computerScore) {
+            finalScoreDisplay.textContent = 'You lose! Game over!';
+            scoreBoard.appendChild(finalScoreDisplay);
+        } else if (humanScore === computerScore) {
+            finalScoreDisplay.textContent = 'It\'s a tie! No one wins!';
+            scoreBoard.appendChild(finalScoreDisplay);
+        }
     }
 }
 
